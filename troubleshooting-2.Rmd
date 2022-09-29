@@ -16,11 +16,10 @@ Note that errors are not all syntactic (i.e., broken code)! Some are logical err
 [MovieLens](https://dl.acm.org/doi/10.1145/2827872) are a series of datasets widely used in education, that describe movie ratings from the MovieLens [website](https://movielens.org/). There are several MovieLens datasets, collected by the [GroupLens Research Project](https://grouplens.org/datasets/movielens/) at the University of Minnesota. Here, we load the MovieLens 100K dataset from Rafael Irizarry and Amy Gill's R package, [dslabs](https://cran.r-project.org/web/packages/dslabs/dslabs.pdf), which contains datasets useful for data analysis practice, homework, and projects in data science courses and workshops. We'll also load other required packages.
 
 ```{r}
-### ERROR HERE ###
-load.packages(dslabs)
-load.packages(tidyverse)
-load.packages(stringr)
-load.packages(gapminder)
+install.packages("dslabs")
+install.packages("tidyverse")
+install.packages("stringr")
+install.packages("gapminder")
 ```
 
 Let's have a look at the dataset! My goal is to:
@@ -30,10 +29,9 @@ Let's have a look at the dataset! My goal is to:
 -   Have a quick look at the tibble, using a *dplyr function*.
 
 ```{r}
-### ERROR HERE ###
 class(dslabs::movielens)
 movieLens <- as_tibble(dslabs::movielens)
-dim(movieLens)
+glimpse(movieLens)
 ```
 
 Now that we've had a quick look at the dataset, it would be interesting to explore the rows (observations) in some more detail. I'd like to consider the movie entries that...
@@ -47,10 +45,10 @@ Now that we've had a quick look at the dataset, it would be interesting to explo
 ```{r}
 ### ERROR HERE ###
 filter(movieLens, genres == "Drama")
-filter(movieLens, !genres == "Drama")
-filter(movieLens, year >= 2000)
-filter(movieLens, year == 1999 | month == 2000)
-filter(movieLens, rating > 4.5, year < 1995)
+filter(movieLens, genres != "Drama")
+filter(movieLens, year > 2000)
+filter(movieLens, year = 1999 | month = 2000)
+filter(movieLens, rating > 4.5 & year < 1995)
 ```
 
 While filtering for *all movies that do not belong to the genre drama* above, I noticed something interesting. I want to filter for the same thing again, this time selecting variables **title and genres first,** and then *everything else*. But I want to do this in a robust way, so that (for example) if I end up changing `movieLens` to contain more or less columns some time in the future, the code will still work. Hint: there is a function to select "everything else"...
