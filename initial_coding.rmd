@@ -1,0 +1,15 @@
+---
+title: "Initial Coding"
+author: "Timo Tolppa"
+date: "2022-09-30"
+output: html_document
+---
+```{r}
+library(palmerpenguins)
+library(tidyverse)
+```
+
+```{r}
+glimpse(penguins)
+```
+
